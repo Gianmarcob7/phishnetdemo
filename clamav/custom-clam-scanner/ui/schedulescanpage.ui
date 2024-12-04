@@ -130,6 +130,31 @@ QPushButton:checked {
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="frequencyLabel">
+     <property name="font">
+      <font>
+       <family>Serif</family>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Scan Frequency:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="frequencyComboBox">
+     <property name="font">
+      <font>
+       <family>Serif</family>
+      </font>
+     </property>
+     <property name="minimumWidth">
+      <number>200</number>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QLabel" name="timeLabel">
      <property name="font">
       <font>
