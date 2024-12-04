@@ -105,108 +105,133 @@ QPushButton:checked {
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="scanTypeLabel">
-     <property name="font">
-      <font>
-       <family>Serif</family>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Scan Type:</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QComboBox" name="scanTypeComboBox">
-     <property name="font">
-      <font>
-       <family>Serif</family>
-      </font>
-     </property>
-     <property name="minimumWidth">
-      <number>200</number>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="frequencyLabel">
-     <property name="font">
-      <font>
-       <family>Serif</family>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Scan Frequency:</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QComboBox" name="frequencyComboBox">
-     <property name="font">
-      <font>
-       <family>Serif</family>
-      </font>
-     </property>
-     <property name="minimumWidth">
-      <number>200</number>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="timeLabel">
-     <property name="font">
-      <font>
-       <family>Serif</family>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Scan Time:</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="timeLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QComboBox" name="hourComboBox">
+      <widget class="QLabel" name="scanTypeLabel">
        <property name="font">
         <font>
          <family>Serif</family>
+         <bold>true</bold>
         </font>
-       </property>
-       <property name="minimumWidth">
-        <number>80</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="colonLabel">
-       <property name="maximumWidth">
-        <number>10</number>
        </property>
        <property name="text">
-        <string>:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <string>Scan Type:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="minuteComboBox">
+      <widget class="QComboBox" name="scanTypeComboBox">
        <property name="font">
         <font>
          <family>Serif</family>
         </font>
        </property>
        <property name="minimumWidth">
-        <number>80</number>
+        <number>150</number>
        </property>
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="frequencyLabel">
+       <property name="font">
+        <font>
+         <family>Serif</family>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Scan Frequency:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="frequencyComboBox">
+       <property name="font">
+        <font>
+         <family>Serif</family>
+        </font>
+       </property>
+       <property name="minimumWidth">
+        <number>150</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="timeLabel">
+       <property name="font">
+        <font>
+         <family>Serif</family>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Scan Time:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="timeLayout">
+       <item>
+        <widget class="QComboBox" name="hourComboBox">
+         <property name="font">
+          <font>
+           <family>Serif</family>
+          </font>
+         </property>
+         <property name="minimumWidth">
+          <number>70</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="colonLabel">
+         <property name="maximumWidth">
+          <number>10</number>
+         </property>
+         <property name="text">
+          <string>:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="minuteComboBox">
+         <property name="font">
+          <font>
+           <family>Serif</family>
+          </font>
+         </property>
+         <property name="minimumWidth">
+          <number>70</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
    <item>
     <widget class="QPushButton" name="scheduleButton">
