@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ScanTypePage</class>
+ <widget class="QWidget" name="ScanTypePage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <widget class="QFrame" name="sidePanel">
+     <property name="maximumWidth">
+      <number>200</number>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QFrame#sidePanel {
+    background-color: #f0f0f0;
+    border-right: 1px solid #dcdcdc;
+}
+QPushButton {
+    text-align: left;
+    padding: 10px;
+    border: none;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin: 2px;
+}
+QPushButton:hover {
+    background-color: #d0d0d0;
+}
+QPushButton:checked {
+    background-color: #c0c0c0;
+    color: #cc0000;
+    font-weight: bold;
+}
+QLabel#titleLabel {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    background: none;
+}</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QPushButton" name="backButton">
+        <property name="font">
+         <font>
+          <family>Serif</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>← Back</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="titleLabel">
+        <property name="font">
+         <font>
+          <family>Serif</family>
+          <pointsize>-1</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Choose Scan Type</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="quickScanButton">
+        <property name="font">
+         <font>
+          <family>Serif</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>Quick Scan</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="systemScanButton">
+        <property name="font">
+         <font>
+          <family>Serif</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>System Scan</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="customScanButton">
+        <property name="font">
+         <font>
+          <family>Serif</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>Custom Scan</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QStackedWidget" name="stackedWidget">
+     <widget class="QWidget" name="quickScanPage">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="quickScanTitle">
+         <property name="font">
+          <font>
+           <family>Serif</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Quick Scan Description</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="quickScanFrame">
+         <property name="styleSheet">
+          <string notr="true">QFrame {
+    background-color: white;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+}</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QLabel" name="quickScanLabel">
+            <property name="font">
+             <font>
+              <family>Serif</family>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border: none;</string>
+            </property>
+            <property name="text">
+             <string>Quick Scan checks the most commonly infected areas of your system, including:
+
+- System Memory
+- Startup Items
+- Critical System Files
+- Windows Startup Folders
+- Profile Directories
+- Registration Keys
+
+This scan typically takes 5-10 minutes to complete.</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="startQuickScanButton">
+            <property name="font">
+             <font>
+              <family>Serif</family>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    background-color: #cc0000;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #b30000;
+}
+QPushButton:pressed {
+    background-color: #990000;
+}</string>
+            </property>
+            <property name="text">
+             <string>Start Quick Scan</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="systemScanPage">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QLabel" name="systemScanTitle">
+         <property name="font">
+          <font>
+           <family>Serif</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>System Scan Description</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="systemScanFrame">
+         <property name="styleSheet">
+          <string notr="true">QFrame {
+    background-color: white;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+}</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QLabel" name="systemScanLabel">
+            <property name="font">
+             <font>
+              <family>Serif</family>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border: none;</string>
+            </property>
+            <property name="text">
+             <string>System Scan performs a thorough check of your entire system, including:
+
+- All Files and Directories
+- Running Processes
+- System Registry
+- Hidden Files
+- Network Connections
+- System Memory
+- Bootable Sectors
+
+This scan may take 30-60 minutes depending on your system.</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="startSystemScanButton">
+            <property name="font">
+             <font>
+              <family>Serif</family>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    background-color: #cc0000;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #b30000;
+}
+QPushButton:pressed {
+    background-color: #990000;
+}</string>
+            </property>
+            <property name="text">
+             <string>Start System Scan</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="customScanPage">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QLabel" name="customScanTitle">
+         <property name="font">
+          <font>
+           <family>Serif</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Custom Scan Description</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="customScanFrame">
+         <property name="styleSheet">
+          <string notr="true">QFrame {
+    background-color: white;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+}</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item>
+           <widget class="QLabel" name="customScanLabel">
+            <property name="font">
+             <font>
+              <family>Serif</family>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border: none;</string>
+            </property>
+            <property name="text">
+             <string>Custom Scan allows you to select specific locations to scan:
+
+- Choose specific files or folders
+- Select drives to scan
+- Customize scan settings
+- Set scan priorities
+- Choose scan depth
+- Select file types to scan
+
+Scan time varies based on selected items.</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="browseButton">
+            <property name="font">
+             <font>
+              <family>Serif</family>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    background-color: #666666;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #555555;
+}
+QPushButton:pressed {
+    background-color: #444444;
+}</string>
+            </property>
+            <property name="text">
+             <string>Browse...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="startCustomScanButton">
+            <property name="font">
+             <font>
+              <family>Serif</family>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    background-color: #cc0000;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #b30000;
+}
+QPushButton:pressed {
+    background-color: #990000;
+}</string>
+            </property>
+            <property name="text">
+             <string>Start Custom Scan</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

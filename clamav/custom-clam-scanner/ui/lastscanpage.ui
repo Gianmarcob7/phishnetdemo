@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LastScanPage</class>
+ <widget class="QWidget" name="LastScanPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>222</width>
+    <height>388</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QPushButton" name="backButton">
+     <property name="styleSheet">
+      <string>
+       QPushButton {
+           background-color: #e0e0e0;
+           border: 1px solid #c0c0c0;
+           border-radius: 3px;
+           padding: 5px 15px;
+       }
+       QPushButton:hover {
+           background-color: #d0d0d0;
+       }
+      </string>
+     </property>
+     <property name="text">
+      <string>Back</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="titleLabel">
+     <property name="font">
+      <font>
+       <family>Serif</family>
+       <pointsize>-1</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string>
+       QLabel {
+           font-size: 18px;
+           color: #cc0000;
+           padding: 10px;
+       }
+      </string>
+     </property>
+     <property name="text">
+      <string>Last Scan Results</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="infoFrame">
+     <property name="styleSheet">
+      <string>
+       QFrame {
+           background-color: #f0f0f0;
+           border: 1px solid #c0c0c0;
+           border-radius: 4px;
+           padding: 10px;
+       }
+       QLabel {
+           font-size: 14px;
+           color: #333333;
+           padding: 5px;
+       }
+      </string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <layout class="QVBoxLayout" name="infoLayout">
+      <item>
+       <widget class="QLabel" name="dateTimeLabel"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="scanTypeLabel"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="durationLabel"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="filesScannedLabel"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="threatsFoundLabel"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="statusLabel"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="buttonLayout">
+     <item>
+      <widget class="QPushButton" name="rescanButton">
+       <property name="font">
+        <font>
+         <family>Serif</family>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string>
+         QPushButton {
+             background-color: #cc0000;
+             color: white;
+             border: none;
+             padding: 8px 16px;
+             border-radius: 4px;
+         }
+         QPushButton:hover {
+             background-color: #b30000;
+         }
+        </string>
+       </property>
+       <property name="text">
+        <string>Rescan</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="viewDetailsButton">
+       <property name="font">
+        <font>
+         <family>Serif</family>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string>
+         QPushButton {
+             background-color: #666666;
+             color: white;
+             border: none;
+             padding: 8px 16px;
+             border-radius: 4px;
+         }
+         QPushButton:hover {
+             background-color: #555555;
+         }
+        </string>
+       </property>
+       <property name="text">
+        <string>View Details</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

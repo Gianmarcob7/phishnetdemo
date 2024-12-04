@@ -1,0 +1,27 @@
+{
+	"BUILD_DIR" : "/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen",
+	"CMAKE_BINARY_DIR" : "/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner",
+	"CMAKE_SOURCE_DIR" : "/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner",
+	"GENERATOR" : "Unix Makefiles",
+	"INCLUDE_DIR" : "/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/include",
+	"INPUTS" : 
+	[
+		"/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/historyyicon.png",
+		"/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/scan.png",
+		"/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/previousscan.png",
+		"/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/schedulescancorrect.png",
+		"/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/quarfilesicon.png"
+	],
+	"LOCK_FILE" : "/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles/ClamAVScannerGUI_autogen.dir/AutoRcc_resources_UYX5XTB5RZ_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "resources" ],
+	"OUTPUT_CHECKSUM" : "UYX5XTB5RZ",
+	"OUTPUT_NAME" : "qrc_resources.cpp",
+	"RCC_EXECUTABLE" : "/usr/lib/qt5/bin/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles/ClamAVScannerGUI_autogen.dir/AutoRcc_resources_UYX5XTB5RZ_Used.txt",
+	"SOURCE" : "/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/resources.qrc",
+	"VERBOSITY" : 0
+}

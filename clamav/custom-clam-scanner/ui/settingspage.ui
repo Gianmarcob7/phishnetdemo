@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SettingsPage</class>
+ <widget class="QWidget" name="SettingsPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QPushButton" name="backButton">
+     <property name="styleSheet">
+      <string>
+       QPushButton {
+           background-color: #e0e0e0;
+           border: 1px solid #c0c0c0;
+           border-radius: 3px;
+           padding: 5px 15px;
+       }
+       QPushButton:hover {
+           background-color: #d0d0d0;
+       }
+      </string>
+     </property>
+     <property name="text">
+      <string>Back</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="titleLabel">
+     <property name="styleSheet">
+      <string>
+       QLabel {
+           font-size: 20px;
+           color: #cc0000;
+           padding: 10px;
+           font-weight: bold;
+       }
+      </string>
+     </property>
+     <property name="text">
+      <string>Settings</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="updateButton">
+     <property name="styleSheet">
+      <string>
+       QPushButton {
+           background-color: #cc0000;
+           color: white;
+           border: none;
+           padding: 8px 16px;
+           border-radius: 4px;
+           font-size: 14px;
+       }
+       QPushButton:hover {
+           background-color: #b30000;
+       }
+      </string>
+     </property>
+     <property name="text">
+      <string>Update Virus Signatures</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="darkModeCheck">
+     <property name="styleSheet">
+      <string>
+       QCheckBox {
+           padding: 8px;
+           font-size: 14px;
+       }
+       QCheckBox::indicator {
+           width: 18px;
+           height: 18px;
+           border-radius: 3px;
+       }
+       QCheckBox::indicator:unchecked {
+           border: 1px solid #c0c0c0;
+       }
+       QCheckBox::indicator:checked {
+           background-color: #cc0000;
+           border: 1px solid #cc0000;
+       }
+      </string>
+     </property>
+     <property name="text">
+      <string>Enable Dark Mode</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="clamVersionLabel">
+     <property name="styleSheet">
+      <string>
+       QLabel {
+           font-size: 14px;
+           padding: 5px;
+       }
+      </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="qtVersionLabel">
+     <property name="styleSheet">
+      <string>
+       QLabel {
+           font-size: 14px;
+           padding: 5px;
+       }
+      </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="phishnetVersionLabel">
+     <property name="styleSheet">
+      <string>
+       QLabel {
+           font-size: 14px;
+           padding: 5px;
+       }
+      </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
