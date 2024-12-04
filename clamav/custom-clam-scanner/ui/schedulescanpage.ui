@@ -2,16 +2,106 @@
 <ui version="4.0">
  <class>ScheduleScanPage</class>
  <widget class="QWidget" name="ScheduleScanPage">
-  <!-- Previous properties remain the same -->
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Schedule Scan</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget { background-color: transparent; }
+QLabel { background: none; color: black; }
+QComboBox {
+    background-color: white;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+    padding: 5px;
+    selection-background-color: #e0e0e0;
+    selection-color: black;
+}
+QComboBox:hover {
+    border-color: #b0b0b0;
+}
+QComboBox::drop-down {
+    border: none;
+}
+QComboBox::down-arrow {
+    image: url(down_arrow.png);
+    width: 12px;
+    height: 12px;
+}
+QComboBox QAbstractItemView {
+    background-color: white;
+    border: 1px solid #d0d0d0;
+    selection-background-color: #e0e0e0;
+    selection-color: black;
+}
+QComboBox QAbstractItemView::item {
+    min-height: 25px;
+    padding: 5px;
+    background-color: white;
+    color: black;
+}
+QComboBox QAbstractItemView::item:selected {
+    background-color: #d0d0d0;
+    color: black;
+}
+QComboBox QAbstractItemView::item:hover {
+    background-color: #e0e0e0;
+    color: black;
+}</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QPushButton" name="backButton">
-      <!-- Back button properties remain the same -->
+     <property name="font">
+      <font>
+       <family>Serif</family>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    text-align: left;
+    padding: 10px;
+    border: none;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin: 2px;
+}
+QPushButton:hover {
+    background-color: #d0d0d0;
+}
+QPushButton:checked {
+    background-color: #c0c0c0;
+    color: #cc0000;
+    font-weight: bold;
+}</string>
+     </property>
+     <property name="text">
+      <string>← Back</string>
+     </property>
     </widget>
    </item>
    <item>
     <widget class="QLabel" name="titleLabel">
-      <!-- Title label properties remain the same -->
+     <property name="font">
+      <font>
+       <family>Serif</family>
+       <pointsize>14</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Schedule Scan</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
    </item>
    <item>
@@ -39,7 +129,88 @@
      </property>
     </widget>
    </item>
-   <!-- Rest of the UI elements remain the same -->
+   <item>
+    <widget class="QLabel" name="timeLabel">
+     <property name="font">
+      <font>
+       <family>Serif</family>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Scan Time:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="timeLayout">
+     <item>
+      <widget class="QComboBox" name="hourComboBox">
+       <property name="font">
+        <font>
+         <family>Serif</family>
+        </font>
+       </property>
+       <property name="minimumWidth">
+        <number>80</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="colonLabel">
+       <property name="maximumWidth">
+        <number>10</number>
+       </property>
+       <property name="text">
+        <string>:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="minuteComboBox">
+       <property name="font">
+        <font>
+         <family>Serif</family>
+        </font>
+       </property>
+       <property name="minimumWidth">
+        <number>80</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QPushButton" name="scheduleButton">
+     <property name="font">
+      <font>
+       <family>Serif</family>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #cc0000;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+QPushButton:hover {
+    background-color: #b30000;
+}
+QPushButton:pressed {
+    background-color: #990000;
+}</string>
+     </property>
+     <property name="text">
+      <string>Schedule Scan</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>
