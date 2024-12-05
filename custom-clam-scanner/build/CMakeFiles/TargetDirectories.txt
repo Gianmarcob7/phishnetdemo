@@ -1,0 +1,9 @@
+/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles/ClamAVScannerGUI.dir
+/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles/edit_cache.dir
+/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles/rebuild_cache.dir
+/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles/list_install_components.dir
+/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles/install.dir
+/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles/install/local.dir
+/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles/install/strip.dir
+/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles/ClamAVScannerGUI_autogen_timestamp_deps.dir
+/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles/ClamAVScannerGUI_autogen.dir

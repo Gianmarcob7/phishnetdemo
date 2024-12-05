@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/new/icons">
+        <file alias="history scan">historyyicon.png</file>
+        <file alias="last scan ">previousscan.png</file>
+        <file alias="quarfiles">quarfilesicon.png</file>
+        <file alias="sch scan">schedulescancorrect.png</file>
+        <file alias="scan">scan.png</file>
+    </qresource>
+</RCC>
