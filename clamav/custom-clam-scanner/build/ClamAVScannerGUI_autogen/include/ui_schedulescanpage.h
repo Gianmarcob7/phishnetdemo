@@ -27,8 +27,13 @@ public:
     QVBoxLayout *verticalLayout;
     QPushButton *backButton;
     QLabel *titleLabel;
+    QHBoxLayout *horizontalLayout;
+    QLabel *scanTypeLabel;
+    QComboBox *scanTypeComboBox;
+    QHBoxLayout *horizontalLayout_2;
     QLabel *frequencyLabel;
     QComboBox *frequencyComboBox;
+    QHBoxLayout *horizontalLayout_3;
     QLabel *timeLabel;
     QHBoxLayout *timeLayout;
     QComboBox *hourComboBox;
@@ -85,7 +90,7 @@ public:
 "    color: black;\n"
 "}\n"
 "QMessageBox {\n"
-"    background-color: #f0f0f0;\n"
+"    background-color: white;\n"
 "}\n"
 "QMessageBox QLabel {\n"
 "    color: black;\n"
@@ -102,7 +107,7 @@ public:
 "    background-color: #d0d0d0;\n"
 "}\n"
 "QDialog {\n"
-"    background-color: #f0f0f0;\n"
+"    background-color: white;\n"
 "}"));
         verticalLayout = new QVBoxLayout(ScheduleScanPage);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
@@ -141,35 +146,59 @@ public:
 
         verticalLayout->addWidget(titleLabel);
 
-        frequencyLabel = new QLabel(ScheduleScanPage);
-        frequencyLabel->setObjectName(QString::fromUtf8("frequencyLabel"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        scanTypeLabel = new QLabel(ScheduleScanPage);
+        scanTypeLabel->setObjectName(QString::fromUtf8("scanTypeLabel"));
         QFont font2;
         font2.setFamily(QString::fromUtf8("Serif"));
         font2.setBold(true);
+        scanTypeLabel->setFont(font2);
+
+        horizontalLayout->addWidget(scanTypeLabel);
+
+        scanTypeComboBox = new QComboBox(ScheduleScanPage);
+        scanTypeComboBox->setObjectName(QString::fromUtf8("scanTypeComboBox"));
+        scanTypeComboBox->setFont(font);
+        scanTypeComboBox->setMinimumWidth(150);
+
+        horizontalLayout->addWidget(scanTypeComboBox);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        frequencyLabel = new QLabel(ScheduleScanPage);
+        frequencyLabel->setObjectName(QString::fromUtf8("frequencyLabel"));
         frequencyLabel->setFont(font2);
 
-        verticalLayout->addWidget(frequencyLabel);
+        horizontalLayout_2->addWidget(frequencyLabel);
 
         frequencyComboBox = new QComboBox(ScheduleScanPage);
         frequencyComboBox->setObjectName(QString::fromUtf8("frequencyComboBox"));
         frequencyComboBox->setFont(font);
-        frequencyComboBox->setMinimumWidth(200);
+        frequencyComboBox->setMinimumWidth(150);
 
-        verticalLayout->addWidget(frequencyComboBox);
+        horizontalLayout_2->addWidget(frequencyComboBox);
 
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         timeLabel = new QLabel(ScheduleScanPage);
         timeLabel->setObjectName(QString::fromUtf8("timeLabel"));
         timeLabel->setFont(font2);
 
-        verticalLayout->addWidget(timeLabel);
+        horizontalLayout_3->addWidget(timeLabel);
 
         timeLayout = new QHBoxLayout();
-        timeLayout->setSpacing(5);
         timeLayout->setObjectName(QString::fromUtf8("timeLayout"));
         hourComboBox = new QComboBox(ScheduleScanPage);
         hourComboBox->setObjectName(QString::fromUtf8("hourComboBox"));
         hourComboBox->setFont(font);
-        hourComboBox->setMinimumWidth(80);
+        hourComboBox->setMinimumWidth(70);
 
         timeLayout->addWidget(hourComboBox);
 
@@ -183,12 +212,15 @@ public:
         minuteComboBox = new QComboBox(ScheduleScanPage);
         minuteComboBox->setObjectName(QString::fromUtf8("minuteComboBox"));
         minuteComboBox->setFont(font);
-        minuteComboBox->setMinimumWidth(80);
+        minuteComboBox->setMinimumWidth(70);
 
         timeLayout->addWidget(minuteComboBox);
 
 
-        verticalLayout->addLayout(timeLayout);
+        horizontalLayout_3->addLayout(timeLayout);
+
+
+        verticalLayout->addLayout(horizontalLayout_3);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -224,6 +256,7 @@ public:
         ScheduleScanPage->setWindowTitle(QCoreApplication::translate("ScheduleScanPage", "Schedule Scan", nullptr));
         backButton->setText(QCoreApplication::translate("ScheduleScanPage", "\342\206\220 Back", nullptr));
         titleLabel->setText(QCoreApplication::translate("ScheduleScanPage", "Schedule Scan", nullptr));
+        scanTypeLabel->setText(QCoreApplication::translate("ScheduleScanPage", "Scan Type:", nullptr));
         frequencyLabel->setText(QCoreApplication::translate("ScheduleScanPage", "Scan Frequency:", nullptr));
         timeLabel->setText(QCoreApplication::translate("ScheduleScanPage", "Scan Time:", nullptr));
         colonLabel->setText(QCoreApplication::translate("ScheduleScanPage", ":", nullptr));

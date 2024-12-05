@@ -1,312 +1,299 @@
 #include "Database.h"
-#include <iostream>
-#include <iomanip>
-#include <sstream>
-#include <filesystem>
-#include <fstream>
-#include <chrono>
-#include <ctime>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QDebug>
+#include <QDateTime>
+#include <QUuid>
+#include <QDir>
+#include <stdexcept>
 
-namespace fs = std::filesystem;
-
-// Initialize database and create tables if they don't exist
-Database::Database() {
-    int rc = sqlite3_open("scan_results.db", &db);
-    if (rc != SQLITE_OK) {
-        std::cerr << "Can't open database: " << sqlite3_errmsg(db) << std::endl;
-    } else {
-        createTables();
-    }
-}
-
-// Create required database schema 
-void Database::createTables() {
-    const char* sql[] = {
-        // Main table for scanning sessions
-        R"(
-        CREATE TABLE IF NOT EXISTS ScanSessions (
-            session_id TEXT PRIMARY KEY,
-            scan_type TEXT NOT NULL,
-            start_time TIMESTAMP,
-            end_time TIMESTAMP,
-            files_scanned INTEGER,
-            threats_found INTEGER
-        );
-        )",
-        // Detailed scan results for each file
-        R"(
-        CREATE TABLE IF NOT EXISTS ScanResults (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            session_id TEXT,
-            file_path TEXT NOT NULL,
-            detected INTEGER NOT NULL,
-            threat_name TEXT,
-            scan_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY(session_id) REFERENCES ScanSessions(session_id)
-        );
-        )"
-    };
-
-    for (const auto& query : sql) {
-        char* errMsg = nullptr;
-        int rc = sqlite3_exec(db, query, nullptr, nullptr, &errMsg);
-        if (rc != SQLITE_OK) {
-            std::cerr << "SQL error: " << errMsg << std::endl;
-            sqlite3_free(errMsg);
+Database::Database() : connected(false) {
+    try {
+        connected = initializeDatabase();
+        if (!connected) {
+            qDebug() << "Failed to initialize database";
         }
+    } catch (const std::exception& e) {
+        qDebug() << "Exception during database initialization:" << e.what();
+        connected = false;
     }
 }
 
-// Generate unique session ID from timestamp and hash
+Database::~Database() {
+    try {
+        if (db.isOpen()) {
+            db.close();
+        }
+    } catch (const std::exception& e) {
+        qDebug() << "Exception during database cleanup:" << e.what();
+    }
+}
+
+bool Database::initializeDatabase() {
+    try {
+        db = QSqlDatabase::addDatabase("QSQLITE");
+        QString dbPath = QDir::currentPath() + "/scan_results.db";
+        db.setDatabaseName(dbPath);
+        
+        if (!db.open()) {
+            qDebug() << "Failed to open database:" << db.lastError().text();
+            return false;
+        }
+
+        // Create tables if they don't exist
+        QSqlQuery query(db);
+        
+        // Sessions table
+        if (!query.exec("CREATE TABLE IF NOT EXISTS sessions "
+                       "(session_id TEXT PRIMARY KEY, "
+                       "scan_type TEXT, "
+                       "start_time TEXT, "
+                       "end_time TEXT, "
+                       "files_scanned INTEGER, "
+                       "threats_found INTEGER)")) {
+            qDebug() << "Failed to create sessions table:" << query.lastError().text();
+            return false;
+        }
+
+        // Scan results table
+        if (!query.exec("CREATE TABLE IF NOT EXISTS scan_results "
+                       "(id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                       "session_id TEXT, "
+                       "file_path TEXT, "
+                       "threat_name TEXT, "
+                       "scan_date TEXT, "
+                       "detected BOOLEAN, "
+                       "FOREIGN KEY(session_id) REFERENCES sessions(session_id))")) {
+            qDebug() << "Failed to create scan_results table:" << query.lastError().text();
+            return false;
+        }
+
+        return true;
+    } catch (const std::exception& e) {
+        qDebug() << "Exception in initializeDatabase:" << e.what();
+        return false;
+    }
+}
+
 std::string Database::generateSessionId() {
-    auto now = std::chrono::system_clock::now();
-    auto time = std::chrono::system_clock::to_time_t(now);
-    std::stringstream ss;
-    ss << std::put_time(std::localtime(&time), "%Y%m%d_%H%M%S_")
-       << std::hex << std::hash<std::string>{}(std::to_string(time));
-    return ss.str();
+    return QUuid::createUuid().toString(QUuid::WithoutBraces).toStdString();
 }
 
-// Get formatted current timestamp 
-std::string Database::getCurrentTimestamp() {
-    auto now = std::chrono::system_clock::now();
-    auto time = std::chrono::system_clock::to_time_t(now);
-    std::stringstream ss;
-    ss << std::put_time(std::localtime(&time), "%Y-%m-%d %H:%M:%S");
-    return ss.str();
-}
-
-// Create new scan session and store initial info
-void Database::startSession(const std::string& scan_type) {
-    current_session_id = generateSessionId();
-    const char* sql = "INSERT INTO ScanSessions (session_id, scan_type, start_time) VALUES (?, ?, ?);";
-    
-    sqlite3_stmt* stmt;
-    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) == SQLITE_OK) {
-        sqlite3_bind_text(stmt, 1, current_session_id.c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_text(stmt, 2, scan_type.c_str(), -1, SQLITE_STATIC);
-        std::string timestamp = getCurrentTimestamp();
-        sqlite3_bind_text(stmt, 3, timestamp.c_str(), -1, SQLITE_STATIC);
-        
-        sqlite3_step(stmt);
-        sqlite3_finalize(stmt);
-    }
-}
-
-// Update session with final stats and generate report
-void Database::endSession(int files_scanned, int threats_found) {
-    const char* sql = "UPDATE ScanSessions SET end_time = ?, files_scanned = ?, threats_found = ? WHERE session_id = ?;";
-    
-    sqlite3_stmt* stmt;
-    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) == SQLITE_OK) {
-        std::string timestamp = getCurrentTimestamp();
-        sqlite3_bind_text(stmt, 1, timestamp.c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_int(stmt, 2, files_scanned);
-        sqlite3_bind_int(stmt, 3, threats_found);
-        sqlite3_bind_text(stmt, 4, current_session_id.c_str(), -1, SQLITE_STATIC);
-        
-        sqlite3_step(stmt);
-        sqlite3_finalize(stmt);
-    }
-
-    generateReport(current_session_id);
-}
-
-// Store scan result for individual file
-void Database::logScanResult(const std::string& filePath, bool detected, const std::string& threatName) {
-    const char* sql = "INSERT INTO ScanResults (session_id, file_path, detected, threat_name) VALUES (?, ?, ?, ?);";
-    
-    sqlite3_stmt* stmt;
-    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) == SQLITE_OK) {
-        sqlite3_bind_text(stmt, 1, current_session_id.c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_text(stmt, 2, filePath.c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_int(stmt, 3, detected ? 1 : 0);
-        sqlite3_bind_text(stmt, 4, threatName.c_str(), -1, SQLITE_STATIC);
-        
-        sqlite3_step(stmt);
-        sqlite3_finalize(stmt);
-    }
-}
-
-// Get most recent scan sessions, limited to specified count
 std::vector<ScanSession> Database::getRecentSessions(int limit) {
     std::vector<ScanSession> sessions;
-    const char* sql = R"(
-        SELECT session_id, scan_type, start_time, end_time, files_scanned, threats_found 
-        FROM ScanSessions 
-        ORDER BY start_time DESC 
-        LIMIT ?;
-    )";
     
-    sqlite3_stmt* stmt;
-    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) == SQLITE_OK) {
-        sqlite3_bind_int(stmt, 1, limit);
-        
-        while (sqlite3_step(stmt) == SQLITE_ROW) {
+    try {
+        if (!connected) {
+            qDebug() << "Database not connected";
+            return sessions;
+        }
+
+        QSqlQuery query(db);
+        query.prepare("SELECT * FROM sessions ORDER BY start_time DESC LIMIT ?");
+        query.addBindValue(limit);
+
+        if (!query.exec()) {
+            qDebug() << "Failed to query sessions:" << query.lastError().text();
+            return sessions;
+        }
+
+        while (query.next()) {
             ScanSession session;
-            session.session_id = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
-            session.scan_type = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
-            session.start_time = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2));
-            session.end_time = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 3));
-            session.files_scanned = sqlite3_column_int(stmt, 4);
-            session.threats_found = sqlite3_column_int(stmt, 5);
+            session.session_id = query.value("session_id").toString().toStdString();
+            session.scan_type = query.value("scan_type").toString().toStdString();
+            session.start_time = query.value("start_time").toString().toStdString();
+            session.end_time = query.value("end_time").toString().toStdString();
+            session.files_scanned = query.value("files_scanned").toInt();
+            session.threats_found = query.value("threats_found").toInt();
             sessions.push_back(session);
         }
-        
-        sqlite3_finalize(stmt);
+    } catch (const std::exception& e) {
+        qDebug() << "Exception in getRecentSessions:" << e.what();
     }
-    
+
     return sessions;
 }
 
-// Get all scan results for a specific session
 std::vector<ScanRecord> Database::getSessionResults(const std::string& session_id) {
     std::vector<ScanRecord> records;
-    const char* sql = R"(
-        SELECT file_path, detected, scan_date, threat_name 
-        FROM ScanResults 
-        WHERE session_id = ? 
-        ORDER BY scan_date;
-    )";
     
-    sqlite3_stmt* stmt;
-    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) == SQLITE_OK) {
-        sqlite3_bind_text(stmt, 1, session_id.c_str(), -1, SQLITE_STATIC);
-        
-        while (sqlite3_step(stmt) == SQLITE_ROW) {
+    try {
+        if (!connected) {
+            qDebug() << "Database not connected";
+            return records;
+        }
+
+        QSqlQuery query(db);
+        query.prepare("SELECT * FROM scan_results WHERE session_id = ? ORDER BY scan_date DESC");
+        query.addBindValue(QString::fromStdString(session_id));
+
+        if (!query.exec()) {
+            qDebug() << "Failed to query scan results:" << query.lastError().text();
+            return records;
+        }
+
+        while (query.next()) {
             ScanRecord record;
-            record.file_path = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
-            record.detected = sqlite3_column_int(stmt, 1) != 0;
-            record.scan_date = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2));
-            record.threat_name = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 3));
+            record.file_path = query.value("file_path").toString().toStdString();
+            record.threat_name = query.value("threat_name").toString().toStdString();
+            record.scan_date = query.value("scan_date").toString().toStdString();
+            record.detected = query.value("detected").toBool();
             records.push_back(record);
         }
-        
-        sqlite3_finalize(stmt);
+    } catch (const std::exception& e) {
+        qDebug() << "Exception in getSessionResults:" << e.what();
     }
-    
+
     return records;
 }
 
-// Get summary of scan session stats
-std::string Database::getScanSummary(const std::string& session_id) {
-    std::stringstream summary;
-    const char* sql = R"(
-        SELECT scan_type, start_time, end_time, files_scanned, threats_found 
-        FROM ScanSessions 
-        WHERE session_id = ?;
-    )";
-    
-    sqlite3_stmt* stmt;
-    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) == SQLITE_OK) {
-        sqlite3_bind_text(stmt, 1, session_id.c_str(), -1, SQLITE_STATIC);
-        
-        if (sqlite3_step(stmt) == SQLITE_ROW) {
-            summary << "Scan Type: " << sqlite3_column_text(stmt, 0) << "\n"
-                   << "Start Time: " << sqlite3_column_text(stmt, 1) << "\n"
-                   << "End Time: " << sqlite3_column_text(stmt, 2) << "\n"
-                   << "Files Scanned: " << sqlite3_column_int(stmt, 3) << "\n"
-                   << "Threats Found: " << sqlite3_column_int(stmt, 4);
+std::string Database::startSession(const std::string& scan_type) {
+    try {
+        if (!connected) {
+            qDebug() << "Database not connected";
+            return "";
         }
-        
-        sqlite3_finalize(stmt);
+
+        current_session_id = generateSessionId();
+        QSqlQuery query(db);
+        query.prepare("INSERT INTO sessions (session_id, scan_type, start_time) "
+                     "VALUES (?, ?, datetime('now', 'localtime'))");
+        query.addBindValue(QString::fromStdString(current_session_id));
+        query.addBindValue(QString::fromStdString(scan_type));
+
+        if (!query.exec()) {
+            qDebug() << "Failed to start session:" << query.lastError().text();
+            return "";
+        }
+
+        return current_session_id;
+    } catch (const std::exception& e) {
+        qDebug() << "Exception in startSession:" << e.what();
+        return "";
     }
-    
-    return summary.str();
 }
 
-// Display formatted scan history with threat details
-void Database::viewScanHistory() {
-    auto sessions = getRecentSessions(10);  // Show last 10 scans
-    
-    if (sessions.empty()) {
-        std::cout << "\nNo scan history found.\n";
-        return;
+void Database::endSession(int files_scanned, int threats_found) {
+    try {
+        if (!connected || current_session_id.empty()) {
+            qDebug() << "Database not connected or no active session";
+            return;
+        }
+
+        QSqlQuery query(db);
+        query.prepare("UPDATE sessions SET "
+                     "end_time = datetime('now', 'localtime'), "
+                     "files_scanned = ?, "
+                     "threats_found = ? "
+                     "WHERE session_id = ?");
+        query.addBindValue(files_scanned);
+        query.addBindValue(threats_found);
+        query.addBindValue(QString::fromStdString(current_session_id));
+
+        if (!query.exec()) {
+            qDebug() << "Failed to end session:" << query.lastError().text();
+        }
+    } catch (const std::exception& e) {
+        qDebug() << "Exception in endSession:" << e.what();
     }
+}
 
-    std::cout << "\n=== Scan History ===\n";
-    std::cout << std::string(100, '-') << "\n";
-    std::cout << std::left
-              << std::setw(25) << "Session ID"
-              << std::setw(15) << "Type"
-              << std::setw(20) << "Start Time"
-              << std::setw(20) << "End Time"
-              << std::setw(10) << "Files"
-              << "Threats\n";
-    std::cout << std::string(100, '-') << "\n";
+void Database::logScanResult(const std::string& filepath, bool threat_detected, const std::string& threat_name) {
+    try {
+        if (!connected || current_session_id.empty()) {
+            qDebug() << "Database not connected or no active session";
+            return;
+        }
 
-    for (const auto& session : sessions) {
-        std::cout << std::left
-                  << std::setw(25) << session.session_id
-                  << std::setw(15) << session.scan_type
-                  << std::setw(20) << session.start_time
-                  << std::setw(20) << (session.end_time.empty() ? "In Progress" : session.end_time)
-                  << std::setw(10) << session.files_scanned
-                  << session.threats_found << "\n";
+        QSqlQuery query(db);
+        query.prepare("INSERT INTO scan_results "
+                     "(session_id, file_path, threat_name, scan_date, detected) "
+                     "VALUES (?, ?, ?, datetime('now', 'localtime'), ?)");
+        query.addBindValue(QString::fromStdString(current_session_id));
+        query.addBindValue(QString::fromStdString(filepath));
+        query.addBindValue(QString::fromStdString(threat_name));
+        query.addBindValue(threat_detected);
 
-        // Show details for any threats found
-        if (session.threats_found > 0) {
-            auto results = getSessionResults(session.session_id);
-            for (const auto& result : results) {
-                if (result.detected) {
-                    std::cout << "  → Threat: " << result.threat_name 
-                             << " in file: " << result.file_path << "\n";
+        if (!query.exec()) {
+            qDebug() << "Failed to log scan result:" << query.lastError().text();
+        }
+    } catch (const std::exception& e) {
+        qDebug() << "Exception in logScanResult:" << e.what();
+    }
+}
+
+int Database::getDurationInMinutes(const ScanSession& session) {
+    try {
+        QDateTime startTime = QDateTime::fromString(QString::fromStdString(session.start_time), Qt::ISODate);
+        QDateTime endTime = QDateTime::fromString(QString::fromStdString(session.end_time), Qt::ISODate);
+        
+        if (!startTime.isValid() || !endTime.isValid()) {
+            qDebug() << "Invalid datetime format in session";
+            return 0;
+        }
+
+        return static_cast<int>(startTime.secsTo(endTime) / 60);
+    } catch (const std::exception& e) {
+        qDebug() << "Exception in getDurationInMinutes:" << e.what();
+        return 0;
+    }
+}
+
+std::string Database::getScanSummary(const std::string& session_id) {
+    try {
+        if (!connected) {
+            return "Database not connected";
+        }
+
+        QSqlQuery query(db);
+        query.prepare("SELECT s.*, "
+                     "(SELECT COUNT(*) FROM scan_results WHERE session_id = s.session_id AND detected = 1) as threats "
+                     "FROM sessions s "
+                     "WHERE s.session_id = ?");
+        query.addBindValue(QString::fromStdString(session_id));
+
+        if (!query.exec() || !query.first()) {
+            qDebug() << "Failed to get scan summary:" << query.lastError().text();
+            return "Failed to retrieve scan information";
+        }
+
+        QString summary = QString("Scan Summary\n\n"
+                                "Scan Type: %1\n"
+                                "Start Time: %2\n"
+                                "End Time: %3\n"
+                                "Files Scanned: %4\n"
+                                "Threats Found: %5\n")
+                             .arg(query.value("scan_type").toString())
+                             .arg(query.value("start_time").toString())
+                             .arg(query.value("end_time").toString())
+                             .arg(query.value("files_scanned").toString())
+                             .arg(query.value("threats").toString());
+
+        // Add threat details if any were found
+        if (query.value("threats").toInt() > 0) {
+            QSqlQuery threatQuery(db);
+            threatQuery.prepare("SELECT file_path, threat_name, scan_date "
+                              "FROM scan_results "
+                              "WHERE session_id = ? AND detected = 1");
+            threatQuery.addBindValue(QString::fromStdString(session_id));
+
+            if (threatQuery.exec()) {
+                summary += "\nDetected Threats:\n";
+                summary += "----------------\n";
+                while (threatQuery.next()) {
+                    summary += QString("\nFile: %1\n"
+                                     "Threat: %2\n"
+                                     "Detected: %3\n")
+                                 .arg(threatQuery.value("file_path").toString())
+                                 .arg(threatQuery.value("threat_name").toString())
+                                 .arg(threatQuery.value("scan_date").toString());
                 }
             }
-            std::cout << "\n";
         }
-    }
-    std::cout << std::string(100, '-') << "\n";
-}
 
-// Generate detailed report file for scan session
-void Database::generateReport(const std::string& session_id) {
-    fs::create_directories("scan_reports");
-    std::string filename = "scan_reports/scan_" + session_id + ".txt";
-    std::ofstream report(filename);
-    
-    if (!report.is_open()) {
-        std::cerr << "Failed to create report file" << std::endl;
-        return;
-    }
-
-    report << getScanSummary(session_id) << "\n\n";
-
-    // Add details of any threats found
-    const char* threats_sql = "SELECT file_path, threat_name, scan_date FROM ScanResults "
-                             "WHERE session_id = ? AND detected = 1;";
-    
-    sqlite3_stmt* stmt;
-    if (sqlite3_prepare_v2(db, threats_sql, -1, &stmt, nullptr) == SQLITE_OK) {
-        sqlite3_bind_text(stmt, 1, session_id.c_str(), -1, SQLITE_STATIC);
-        
-        bool found_threats = false;
-        while (sqlite3_step(stmt) == SQLITE_ROW) {
-            if (!found_threats) {
-                report << "Detected Threats:\n";
-                report << "================\n\n";
-                found_threats = true;
-            }
-            
-            report << "File: " << sqlite3_column_text(stmt, 0) << "\n";
-            report << "Threat: " << sqlite3_column_text(stmt, 1) << "\n";
-            report << "Detection Time: " << sqlite3_column_text(stmt, 2) << "\n\n";
-        }
-        
-        if (!found_threats) {
-            report << "No threats were detected during this scan.\n";
-        }
-        
-        sqlite3_finalize(stmt);
-    }
-
-    report.close();
-    std::cout << "\nScan report generated: " << filename << std::endl;
-}
-
-// Clean up database connection
-Database::~Database() {
-    if (db) {
-        sqlite3_close(db);
+        return summary.toStdString();
+    } catch (const std::exception& e) {
+        qDebug() << "Exception in getScanSummary:" << e.what();
+        return std::string("Error generating scan summary: ") + e.what();
     }
 }

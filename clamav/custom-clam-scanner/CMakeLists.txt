@@ -19,9 +19,12 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     add_compile_options(-Wall -Wextra)
 endif()
 
+# Help CMake find Qt SQL module
+set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "/usr/lib/x86_64-linux-gnu/cmake/Qt5Sql")
+
 # Find required packages
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Core)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Core Sql)
 find_package(SQLite3 REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(PkgConfig REQUIRED)
@@ -35,6 +38,8 @@ set(BACKEND_SOURCES
     src/systemscan.cpp
     src/customscan.cpp
     src/signatureupdater.cpp
+    src/ScanWorker.cpp
+    src/customfiledialog.cpp
 )
 
 # Backend headers
@@ -45,6 +50,8 @@ set(BACKEND_HEADERS
     include/systemscan.h
     include/customscan.h
     include/signatureupdater.h
+    include/ScanWorker.h
+    include/customfiledialog.h
 )
 
 # UI source files
@@ -117,6 +124,7 @@ target_include_directories(ClamAVScannerGUI PRIVATE
 target_link_libraries(ClamAVScannerGUI PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Sql
     ${SQLite3_LIBRARIES}
     ${CLAMAV_LIBRARIES}
     stdc++fs

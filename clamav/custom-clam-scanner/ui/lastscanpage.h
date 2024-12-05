@@ -1,16 +1,15 @@
-// lastscanpage.h
 #ifndef LASTSCANPAGE_H
 #define LASTSCANPAGE_H
 
 #include <QWidget>
 #include <QDateTime>
+#include "Database.h"
 
 namespace Ui {
 class LastScanPage;
 }
 
-class LastScanPage : public QWidget
-{
+class LastScanPage : public QWidget {
     Q_OBJECT
 
   public:
@@ -24,9 +23,12 @@ class LastScanPage : public QWidget
 
   signals:
     void backButtonClicked();
+    void startScan(const QString& scanType);
 
   private:
     Ui::LastScanPage *ui;
+    Database db;
+    ScanSession lastScanSession;
     void loadLastScanInfo();
 };
 

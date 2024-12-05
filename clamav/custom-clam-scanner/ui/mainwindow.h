@@ -1,4 +1,3 @@
-// mainwindow.h
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -18,18 +17,19 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-  public:
+
+public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void setupMainWindow();
 
-  public slots:
+public slots:
     void handleDarkModeChange(bool isDark);
 
-  protected:
+protected:
     void resizeEvent(QResizeEvent* event) override;
 
-  private slots:
+private slots:
     void openScanPage();
     void openSchedulePage();
     void openHistoryPage();
@@ -40,9 +40,7 @@ class MainWindow : public QMainWindow
     void updateIconSizes();
     void onCloseButtonClicked();
 
-
-
-  private:
+private:
     Ui::MainWindow *ui;
     ScanTypePage *scanPage;
     ScheduleScanPage *schedulePage;
@@ -52,4 +50,4 @@ class MainWindow : public QMainWindow
     SettingsPage *settingsPage;
 };
 
-#endif
+#endif // MAINWINDOW_H

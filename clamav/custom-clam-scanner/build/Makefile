@@ -275,6 +275,54 @@ src/Database.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClamAVScannerGUI.dir/build.make CMakeFiles/ClamAVScannerGUI.dir/src/Database.cpp.s
 .PHONY : src/Database.cpp.s
 
+src/ScanWorker.o: src/ScanWorker.cpp.o
+.PHONY : src/ScanWorker.o
+
+# target to build an object file
+src/ScanWorker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClamAVScannerGUI.dir/build.make CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.o
+.PHONY : src/ScanWorker.cpp.o
+
+src/ScanWorker.i: src/ScanWorker.cpp.i
+.PHONY : src/ScanWorker.i
+
+# target to preprocess a source file
+src/ScanWorker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClamAVScannerGUI.dir/build.make CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.i
+.PHONY : src/ScanWorker.cpp.i
+
+src/ScanWorker.s: src/ScanWorker.cpp.s
+.PHONY : src/ScanWorker.s
+
+# target to generate assembly for a file
+src/ScanWorker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClamAVScannerGUI.dir/build.make CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.s
+.PHONY : src/ScanWorker.cpp.s
+
+src/customfiledialog.o: src/customfiledialog.cpp.o
+.PHONY : src/customfiledialog.o
+
+# target to build an object file
+src/customfiledialog.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClamAVScannerGUI.dir/build.make CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.o
+.PHONY : src/customfiledialog.cpp.o
+
+src/customfiledialog.i: src/customfiledialog.cpp.i
+.PHONY : src/customfiledialog.i
+
+# target to preprocess a source file
+src/customfiledialog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClamAVScannerGUI.dir/build.make CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.i
+.PHONY : src/customfiledialog.cpp.i
+
+src/customfiledialog.s: src/customfiledialog.cpp.s
+.PHONY : src/customfiledialog.s
+
+# target to generate assembly for a file
+src/customfiledialog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClamAVScannerGUI.dir/build.make CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.s
+.PHONY : src/customfiledialog.cpp.s
+
 src/customscan.o: src/customscan.cpp.o
 .PHONY : src/customscan.o
 
@@ -611,6 +659,12 @@ help:
 	@echo "... src/Database.o"
 	@echo "... src/Database.i"
 	@echo "... src/Database.s"
+	@echo "... src/ScanWorker.o"
+	@echo "... src/ScanWorker.i"
+	@echo "... src/ScanWorker.s"
+	@echo "... src/customfiledialog.o"
+	@echo "... src/customfiledialog.i"
+	@echo "... src/customfiledialog.s"
 	@echo "... src/customscan.o"
 	@echo "... src/customscan.i"
 	@echo "... src/customscan.s"

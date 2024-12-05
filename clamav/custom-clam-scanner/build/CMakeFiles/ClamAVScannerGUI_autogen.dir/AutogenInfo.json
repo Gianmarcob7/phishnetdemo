@@ -134,6 +134,8 @@
 		"/usr/share/cmake-3.28/Modules/CMakeParseArguments.cmake",
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigVersion.cmake",
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfig.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Sql/Qt5SqlConfigVersion.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Sql/Qt5SqlConfig.cmake",
 		"/usr/share/cmake-3.28/Modules/FindSQLite3.cmake",
 		"/usr/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake",
 		"/usr/share/cmake-3.28/Modules/FindPackageMessage.cmake",
@@ -158,6 +160,18 @@
 			"/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/include/Database.h",
 			"MU",
 			"6YEA5652QU/moc_Database.cpp",
+			null
+		],
+		[
+			"/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/include/ScanWorker.h",
+			"MU",
+			"6YEA5652QU/moc_ScanWorker.cpp",
+			null
+		],
+		[
+			"/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/include/customfiledialog.h",
+			"MU",
+			"6YEA5652QU/moc_customfiledialog.cpp",
 			null
 		],
 		[
@@ -236,7 +250,14 @@
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
 	"INCLUDE_DIR" : "/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/include",
 	"MOC_COMPILATION_FILE" : "/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/mocs_compilation.cpp",
-	"MOC_DEFINITIONS" : [ "QT_CORE_LIB", "QT_GUI_LIB", "QT_NO_DEBUG", "QT_WIDGETS_LIB" ],
+	"MOC_DEFINITIONS" : 
+	[
+		"QT_CORE_LIB",
+		"QT_GUI_LIB",
+		"QT_NO_DEBUG",
+		"QT_SQL_LIB",
+		"QT_WIDGETS_LIB"
+	],
 	"MOC_DEPEND_FILTERS" : 
 	[
 		[
@@ -254,6 +275,7 @@
 		"/usr/include/x86_64-linux-gnu/qt5/QtGui",
 		"/usr/include/x86_64-linux-gnu/qt5/QtCore",
 		"/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++",
+		"/usr/include/x86_64-linux-gnu/qt5/QtSql",
 		"/usr/include",
 		"/usr/include/c++/13",
 		"/usr/include/x86_64-linux-gnu/c++/13",
@@ -289,6 +311,16 @@
 	[
 		[
 			"/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/src/Database.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/src/ScanWorker.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/src/customfiledialog.cpp",
 			"MU",
 			null
 		],

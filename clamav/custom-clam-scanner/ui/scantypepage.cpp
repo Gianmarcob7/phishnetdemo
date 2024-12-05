@@ -1,169 +1,282 @@
-// schedulescanpage.cpp
-#include "schedulescanpage.h"
-#include "ui_schedulescanpage.h"
+#include "scantypepage.h"
+#include "ui_scantypepage.h"
+#include "customfiledialog.h"
 #include <QMessageBox>
-#include <QDebug>
+#include <QButtonGroup>
 #include <QFileDialog>
+#include <QProgressDialog>
 #include <QDateTime>
-#include <QTime>
+#include <QFileInfo>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
 
-ScheduleScanPage::ScheduleScanPage(QWidget *parent)
+ScanTypePage::ScanTypePage(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::ScheduleScanPage)
-    , scheduler(new ScanScheduler())
-    , selectedDirectory("")
+    , ui(new Ui::ScanTypePage)
+    , scanThread(nullptr)
+    , worker(nullptr)
+    , scheduleTimer(nullptr)
 {
-    try {
-        ui->setupUi(this);
-        setupUI();
-        loadScheduledScans();
-    }
-    catch (const std::exception& e) {
-        qDebug() << "Exception in ScheduleScanPage constructor:" << e.what();
-    }
-}
-
-ScheduleScanPage::~ScheduleScanPage()
-{
-    try {
-        delete scheduler;
-        delete ui;
-    }
-    catch (const std::exception& e) {
-        qDebug() << "Exception in ScheduleScanPage destructor:" << e.what();
-    }
-}
-
-void ScheduleScanPage::setupUI()
-{
-    // Set up frequency combo box with updated intervals
-    ui->frequencyComboBox->addItem("Daily", static_cast<int>(ScanInterval::DAILY));
-    ui->frequencyComboBox->addItem("Weekly", static_cast<int>(ScanInterval::WEEKLY));
-    ui->frequencyComboBox->addItem("Monthly", static_cast<int>(ScanInterval::MONTHLY));
+    ui->setupUi(this);
 
     // Connect signals
-    connect(ui->backButton, &QPushButton::clicked, this, &ScheduleScanPage::onBackButtonClicked);
-    connect(ui->scheduleButton, &QPushButton::clicked, this, &ScheduleScanPage::onScheduleButtonClicked);
+    connect(ui->backButton, &QPushButton::clicked, this, &ScanTypePage::onBackButtonClicked);
+    connect(ui->quickScanButton, &QPushButton::clicked, this, &ScanTypePage::startQuickScan);
+    connect(ui->systemScanButton, &QPushButton::clicked, this, &ScanTypePage::startSystemScan);
+    connect(ui->customScanButton, &QPushButton::clicked, this, &ScanTypePage::onCustomScanButtonClicked);
+    connect(ui->browseButton, &QPushButton::clicked, this, &ScanTypePage::onBrowseButtonClicked);
 
-    // Setup initial state
-    updateNextScanLabel();
-}
-
-void ScheduleScanPage::loadScheduledScans()
-{
-    // This function would load any previously scheduled scans
-    // For now, we just update the next scan label
-    updateNextScanLabel();
-}
-
-void ScheduleScanPage::updateNextScanLabel()
-{
-    ScanInterval interval = static_cast<ScanInterval>(ui->frequencyComboBox->currentData().toInt());
-    QDateTime nextScan = scheduler->calculateNextRunTime(interval);
+    ui->stackedWidget->setCurrentIndex(0);
+    ui->startCustomScanButton->setEnabled(false);
     
-    QString nextScanText = QString("Next scan will run at: %1")
-                              .arg(nextScan.toString("yyyy-MM-dd hh:mm:ss"));
-    ui->nextScanLabel->setText(nextScanText);
+    setupScanWorker();
+    setupScheduler();
 }
 
-void ScheduleScanPage::onScheduleButtonClicked()
+ScanTypePage::~ScanTypePage()
 {
-    try {
-        ScanInterval interval = static_cast<ScanInterval>(ui->frequencyComboBox->currentData().toInt());
-        
-        // Schedule the scan
-        int scanId = scheduler->scheduleNewScan(ScanType::QUICK, interval, selectedDirectory);
-        
-        if (scanId != -1) {
-            QString message = QString("Scan scheduled successfully!\n\n"
-                                   "Scan ID: %1\n"
-                                   "Type: Quick Scan\n"
-                                   "Frequency: %2\n")
-                                .arg(scanId)
-                                .arg(ui->frequencyComboBox->currentText());
-
-            QMessageBox* msgBox = new QMessageBox(this);
-            msgBox->setWindowTitle("Success");
-            msgBox->setText(message);
-            msgBox->setIcon(QMessageBox::Information);
-            msgBox->exec();
-            delete msgBox;
-
-            // Update UI
-            loadScheduledScans();
-        } else {
-            QMessageBox* msgBox = new QMessageBox(this);
-            msgBox->setWindowTitle("Error");
-            msgBox->setText("Failed to schedule scan. Please try again.");
-            msgBox->setIcon(QMessageBox::Warning);
-            msgBox->exec();
-            delete msgBox;
-        }
+    if (scanThread) {
+        scanThread->quit();
+        scanThread->wait();
+        delete scanThread;
     }
-    catch (const std::exception& e) {
-        qDebug() << "Exception in onScheduleButtonClicked:" << e.what();
-        QMessageBox* msgBox = new QMessageBox(this);
-        msgBox->setWindowTitle("Error");
-        msgBox->setText("An error occurred while scheduling the scan.");
-        msgBox->setIcon(QMessageBox::Critical);
-        msgBox->exec();
-        delete msgBox;
+    if (scheduleTimer) {
+        scheduleTimer->stop();
+        delete scheduleTimer;
     }
+    delete ui;
 }
 
-void ScheduleScanPage::onDeleteScanClicked(int scanId)
+void ScanTypePage::setupScanWorker()
 {
-    QMessageBox::StandardButton reply = QMessageBox::question(this, 
-        "Confirm Delete",
-        "Are you sure you want to delete this scheduled scan?",
-        QMessageBox::Yes | QMessageBox::No);
+    scanThread = new QThread(this);
+    worker = new ScanWorker();
+    worker->moveToThread(scanThread);
 
-    if (reply == QMessageBox::Yes) {
-        if (scheduler->removeScan(scanId)) {
-            QMessageBox::information(this, "Success", "Scheduled scan deleted successfully.");
-        } else {
-            QMessageBox::warning(this, "Error", "Failed to delete scheduled scan.");
-        }
-        loadScheduledScans();
-    }
+    connect(this, &ScanTypePage::startScan, worker, &ScanWorker::doScan);
+    connect(worker, &ScanWorker::scanComplete, this, &ScanTypePage::handleScanComplete);
+    connect(worker, &ScanWorker::scanProgress, this, &ScanTypePage::updateScanProgress);
+    connect(scanThread, &QThread::finished, worker, &QObject::deleteLater);
+
+    scanThread->start();
 }
 
-void ScheduleScanPage::onBackButtonClicked()
+void ScanTypePage::setupScheduler()
+{
+    scheduleTimer = new QTimer(this);
+    connect(scheduleTimer, &QTimer::timeout, this, &ScanTypePage::checkScheduledScans);
+    scheduleTimer->start(60000); // Check every minute
+}
+
+void ScanTypePage::setMessageBoxStyle(QMessageBox* msgBox)
+{
+    msgBox->setStyleSheet(
+        "QMessageBox {"
+        "    background-color: #f0f0f0;"
+        "    color: #333333;"
+        "}"
+        "QMessageBox QLabel {"
+        "    color: #333333;"
+        "    font-family: Serif;"
+        "    font-size: 12px;"
+        "    padding: 10px;"
+        "}"
+        "QPushButton {"
+        "    background-color: #666666;"
+        "    color: white;"
+        "    border: none;"
+        "    padding: 6px 12px;"
+        "    border-radius: 4px;"
+        "    font-family: Serif;"
+        "    font-weight: bold;"
+        "    min-width: 80px;"
+        "}"
+        "QPushButton:hover {"
+        "    background-color: #555555;"
+        "}"
+    );
+}
+
+void ScanTypePage::onBackButtonClicked()
 {
     emit backButtonClicked();
 }
 
-// This helper method could be used to format the display of scan schedules
-QString ScheduleScanPage::formatScanSchedule(const ScheduledScan* scan)
+void ScanTypePage::onBrowseButtonClicked()
 {
-    QString intervalStr;
-    switch (scan->interval) {
-        case ScanInterval::DAILY:
-            intervalStr = "Daily";
-            break;
-        case ScanInterval::WEEKLY:
-            intervalStr = "Weekly";
-            break;
-        case ScanInterval::MONTHLY:
-            intervalStr = "Monthly";
-            break;
+    CustomFileDialog dialog(this);
+    
+    if (dialog.exec() == QDialog::Accepted) {
+        QStringList files = dialog.selectedFiles();
+        if (!files.isEmpty()) {
+            selectedDirectory = files.first();
+            ui->startCustomScanButton->setEnabled(true);
+            
+            QMessageBox* msgBox = new QMessageBox(this);
+            msgBox->setWindowTitle("Selected Path");
+            QString pathType = QFileInfo(selectedDirectory).isDir() ? "directory" : "file";
+            msgBox->setText("Selected " + pathType + " for scanning: \n" + selectedDirectory);
+            setMessageBoxStyle(msgBox);
+            msgBox->exec();
+            delete msgBox;
+        }
+    }
+}
+
+void ScanTypePage::onCustomScanButtonClicked()
+{
+    CustomFileDialog dialog(this);
+    
+    if (dialog.exec() == QDialog::Accepted) {
+        QStringList files = dialog.selectedFiles();
+        if (!files.isEmpty()) {
+            selectedDirectory = files.first();
+            ui->startCustomScanButton->setEnabled(true);
+            startCustomScan();
+        }
+    }
+}
+
+void ScanTypePage::startQuickScan()
+{
+    QProgressDialog* progressDialog = new QProgressDialog("Starting Quick Scan...", "Cancel", 0, 0, this);
+    progressDialog->setWindowTitle("Quick Scan");
+    progressDialog->setWindowModality(Qt::WindowModal);
+    progressDialog->setAutoClose(false);
+    progressDialog->setAutoReset(false);
+    progressDialog->setMinimumDuration(0);
+    progressDialog->show();
+
+    worker->setScanType("quick");
+    
+    QMessageBox* msgBox = new QMessageBox(this);
+    msgBox->setWindowTitle("Quick Scan");
+    msgBox->setText("Starting Quick Scan...\n\nScanning user directories for potential threats.");
+    setMessageBoxStyle(msgBox);
+    msgBox->exec();
+    delete msgBox;
+
+    emit startScan();
+}
+
+void ScanTypePage::startSystemScan()
+{
+    QProgressDialog* progressDialog = new QProgressDialog("Starting System Scan...", "Cancel", 0, 0, this);
+    progressDialog->setWindowTitle("System Scan");
+    progressDialog->setWindowModality(Qt::WindowModal);
+    progressDialog->setAutoClose(false);
+    progressDialog->setAutoReset(false);
+    progressDialog->show();
+
+    worker->setScanType("system");
+    
+    QMessageBox* msgBox = new QMessageBox(this);
+    msgBox->setWindowTitle("System Scan");
+    msgBox->setText("Starting System Scan...\n\nThis may take some time.");
+    setMessageBoxStyle(msgBox);
+    msgBox->exec();
+    delete msgBox;
+
+    emit startScan();
+}
+
+void ScanTypePage::startCustomScan()
+{
+    QProgressDialog* progressDialog = new QProgressDialog("Starting Custom Scan...", "Cancel", 0, 0, this);
+    progressDialog->setWindowTitle("Custom Scan");
+    progressDialog->setWindowModality(Qt::WindowModal);
+    progressDialog->setAutoClose(false);
+    progressDialog->setAutoReset(false);
+    progressDialog->show();
+
+    worker->setScanType("custom");
+    worker->setScanPath(selectedDirectory);
+
+    QMessageBox* msgBox = new QMessageBox(this);
+    msgBox->setWindowTitle("Custom Scan");
+    QString pathType = QFileInfo(selectedDirectory).isDir() ? "directory" : "file";
+    msgBox->setText("Starting Custom Scan of " + pathType + ":\n" + selectedDirectory);
+    setMessageBoxStyle(msgBox);
+    msgBox->exec();
+    delete msgBox;
+
+    emit startScan();
+}
+
+void ScanTypePage::handleScanComplete(int filesScanned, int threatsFound)
+{
+    QList<QProgressDialog*> progressDialogs = findChildren<QProgressDialog*>();
+    for (QProgressDialog* dialog : progressDialogs) {
+        dialog->close();
+        dialog->deleteLater();
     }
 
-    QString typeStr;
-    switch (scan->type) {
-        case ScanType::QUICK:
-            typeStr = "Quick Scan";
-            break;
-        case ScanType::FULL:
-            typeStr = "Full Scan";
-            break;
-        case ScanType::CUSTOM:
-            typeStr = "Custom Scan";
-            break;
+    QString message = QString("Scan Complete!\n\n"
+                            "Files Scanned: %1\n"
+                            "Threats Found: %2\n\n")
+                         .arg(filesScanned)
+                         .arg(threatsFound);
+    
+    if (threatsFound > 0) {
+        message += QString("Threats have been moved to quarantine at:\n%1")
+                      .arg("/home/gianmarco/clamav/custom-clam-scanner/build/Quarantine");
+    } else {
+        message += "No threats were detected.";
     }
 
-    return QString("%1 - %2\nNext Run: %3")
-               .arg(typeStr)
-               .arg(intervalStr)
-               .arg(scan->nextRunTime.toString("yyyy-MM-dd hh:mm:ss"));
-}s
+    QMessageBox* msgBox = new QMessageBox(this);
+    msgBox->setWindowTitle("Scan Results");
+    msgBox->setText(message);
+    setMessageBoxStyle(msgBox);
+    msgBox->exec();
+    delete msgBox;
+}
+
+void ScanTypePage::updateScanProgress(int filesScanned)
+{
+    QList<QProgressDialog*> progressDialogs = findChildren<QProgressDialog*>();
+    for (QProgressDialog* dialog : progressDialogs) {
+        dialog->setLabelText(QString("Scanning...\nFiles processed: %1\nPlease wait...")
+                               .arg(filesScanned));
+        dialog->setMinimum(0);
+        dialog->setMaximum(0);
+    }
+}
+
+void ScanTypePage::checkScheduledScans()
+{
+    if (!scheduledScanTime.isValid()) return;
+    
+    if (QDateTime::currentDateTime() >= scheduledScanTime) {
+        // Time to run the scheduled scan
+        if (scheduledScanType == "quick") {
+            startQuickScan();
+        } else if (scheduledScanType == "system") {
+            startSystemScan();
+        } else if (scheduledScanType == "custom") {
+            startCustomScan();
+        }
+        
+        // Clear the scheduled time after running
+        scheduledScanTime = QDateTime();
+        scheduledScanType.clear();
+    }
+}
+
+void ScanTypePage::onScanTypeChanged(int index)
+{
+    ui->stackedWidget->setCurrentIndex(index);
+    
+    // Store the selected scan type
+    switch(index) {
+        case 0:
+            scheduledScanType = "quick";
+            break;
+        case 1:
+            scheduledScanType = "system";
+            break;
+        case 2:
+            scheduledScanType = "custom";
+            break;
+    }
+}

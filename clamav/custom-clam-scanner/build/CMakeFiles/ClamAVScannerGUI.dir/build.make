@@ -188,10 +188,38 @@ CMakeFiles/ClamAVScannerGUI.dir/src/signatureupdater.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ClamAVScannerGUI.dir/src/signatureupdater.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/src/signatureupdater.cpp -o CMakeFiles/ClamAVScannerGUI.dir/src/signatureupdater.cpp.s
 
+CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/flags.make
+CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.o: /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/src/ScanWorker.cpp
+CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.o -MF CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.o.d -o CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.o -c /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/src/ScanWorker.cpp
+
+CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/src/ScanWorker.cpp > CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.i
+
+CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/src/ScanWorker.cpp -o CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.s
+
+CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/flags.make
+CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.o: /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/src/customfiledialog.cpp
+CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.o -MF CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.o.d -o CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.o -c /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/src/customfiledialog.cpp
+
+CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/src/customfiledialog.cpp > CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.i
+
+CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/src/customfiledialog.cpp -o CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.s
+
 CMakeFiles/ClamAVScannerGUI.dir/ui/main.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/flags.make
 CMakeFiles/ClamAVScannerGUI.dir/ui/main.cpp.o: /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/main.cpp
 CMakeFiles/ClamAVScannerGUI.dir/ui/main.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ui/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ui/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ClamAVScannerGUI.dir/ui/main.cpp.o -MF CMakeFiles/ClamAVScannerGUI.dir/ui/main.cpp.o.d -o CMakeFiles/ClamAVScannerGUI.dir/ui/main.cpp.o -c /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/main.cpp
 
 CMakeFiles/ClamAVScannerGUI.dir/ui/main.cpp.i: cmake_force
@@ -205,7 +233,7 @@ CMakeFiles/ClamAVScannerGUI.dir/ui/main.cpp.s: cmake_force
 CMakeFiles/ClamAVScannerGUI.dir/ui/mainwindow.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/flags.make
 CMakeFiles/ClamAVScannerGUI.dir/ui/mainwindow.cpp.o: /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/mainwindow.cpp
 CMakeFiles/ClamAVScannerGUI.dir/ui/mainwindow.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ui/mainwindow.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ui/mainwindow.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ClamAVScannerGUI.dir/ui/mainwindow.cpp.o -MF CMakeFiles/ClamAVScannerGUI.dir/ui/mainwindow.cpp.o.d -o CMakeFiles/ClamAVScannerGUI.dir/ui/mainwindow.cpp.o -c /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/mainwindow.cpp
 
 CMakeFiles/ClamAVScannerGUI.dir/ui/mainwindow.cpp.i: cmake_force
@@ -219,7 +247,7 @@ CMakeFiles/ClamAVScannerGUI.dir/ui/mainwindow.cpp.s: cmake_force
 CMakeFiles/ClamAVScannerGUI.dir/ui/scantypepage.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/flags.make
 CMakeFiles/ClamAVScannerGUI.dir/ui/scantypepage.cpp.o: /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/scantypepage.cpp
 CMakeFiles/ClamAVScannerGUI.dir/ui/scantypepage.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ui/scantypepage.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ui/scantypepage.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ClamAVScannerGUI.dir/ui/scantypepage.cpp.o -MF CMakeFiles/ClamAVScannerGUI.dir/ui/scantypepage.cpp.o.d -o CMakeFiles/ClamAVScannerGUI.dir/ui/scantypepage.cpp.o -c /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/scantypepage.cpp
 
 CMakeFiles/ClamAVScannerGUI.dir/ui/scantypepage.cpp.i: cmake_force
@@ -233,7 +261,7 @@ CMakeFiles/ClamAVScannerGUI.dir/ui/scantypepage.cpp.s: cmake_force
 CMakeFiles/ClamAVScannerGUI.dir/ui/schedulescanpage.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/flags.make
 CMakeFiles/ClamAVScannerGUI.dir/ui/schedulescanpage.cpp.o: /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/schedulescanpage.cpp
 CMakeFiles/ClamAVScannerGUI.dir/ui/schedulescanpage.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ui/schedulescanpage.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ui/schedulescanpage.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ClamAVScannerGUI.dir/ui/schedulescanpage.cpp.o -MF CMakeFiles/ClamAVScannerGUI.dir/ui/schedulescanpage.cpp.o.d -o CMakeFiles/ClamAVScannerGUI.dir/ui/schedulescanpage.cpp.o -c /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/schedulescanpage.cpp
 
 CMakeFiles/ClamAVScannerGUI.dir/ui/schedulescanpage.cpp.i: cmake_force
@@ -247,7 +275,7 @@ CMakeFiles/ClamAVScannerGUI.dir/ui/schedulescanpage.cpp.s: cmake_force
 CMakeFiles/ClamAVScannerGUI.dir/ui/historypage.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/flags.make
 CMakeFiles/ClamAVScannerGUI.dir/ui/historypage.cpp.o: /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/historypage.cpp
 CMakeFiles/ClamAVScannerGUI.dir/ui/historypage.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ui/historypage.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ui/historypage.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ClamAVScannerGUI.dir/ui/historypage.cpp.o -MF CMakeFiles/ClamAVScannerGUI.dir/ui/historypage.cpp.o.d -o CMakeFiles/ClamAVScannerGUI.dir/ui/historypage.cpp.o -c /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/historypage.cpp
 
 CMakeFiles/ClamAVScannerGUI.dir/ui/historypage.cpp.i: cmake_force
@@ -261,7 +289,7 @@ CMakeFiles/ClamAVScannerGUI.dir/ui/historypage.cpp.s: cmake_force
 CMakeFiles/ClamAVScannerGUI.dir/ui/quarantinepage.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/flags.make
 CMakeFiles/ClamAVScannerGUI.dir/ui/quarantinepage.cpp.o: /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/quarantinepage.cpp
 CMakeFiles/ClamAVScannerGUI.dir/ui/quarantinepage.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ui/quarantinepage.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ui/quarantinepage.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ClamAVScannerGUI.dir/ui/quarantinepage.cpp.o -MF CMakeFiles/ClamAVScannerGUI.dir/ui/quarantinepage.cpp.o.d -o CMakeFiles/ClamAVScannerGUI.dir/ui/quarantinepage.cpp.o -c /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/quarantinepage.cpp
 
 CMakeFiles/ClamAVScannerGUI.dir/ui/quarantinepage.cpp.i: cmake_force
@@ -275,7 +303,7 @@ CMakeFiles/ClamAVScannerGUI.dir/ui/quarantinepage.cpp.s: cmake_force
 CMakeFiles/ClamAVScannerGUI.dir/ui/lastscanpage.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/flags.make
 CMakeFiles/ClamAVScannerGUI.dir/ui/lastscanpage.cpp.o: /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/lastscanpage.cpp
 CMakeFiles/ClamAVScannerGUI.dir/ui/lastscanpage.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ui/lastscanpage.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ui/lastscanpage.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ClamAVScannerGUI.dir/ui/lastscanpage.cpp.o -MF CMakeFiles/ClamAVScannerGUI.dir/ui/lastscanpage.cpp.o.d -o CMakeFiles/ClamAVScannerGUI.dir/ui/lastscanpage.cpp.o -c /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/lastscanpage.cpp
 
 CMakeFiles/ClamAVScannerGUI.dir/ui/lastscanpage.cpp.i: cmake_force
@@ -289,7 +317,7 @@ CMakeFiles/ClamAVScannerGUI.dir/ui/lastscanpage.cpp.s: cmake_force
 CMakeFiles/ClamAVScannerGUI.dir/ui/settingspage.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/flags.make
 CMakeFiles/ClamAVScannerGUI.dir/ui/settingspage.cpp.o: /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/settingspage.cpp
 CMakeFiles/ClamAVScannerGUI.dir/ui/settingspage.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ui/settingspage.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ui/settingspage.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ClamAVScannerGUI.dir/ui/settingspage.cpp.o -MF CMakeFiles/ClamAVScannerGUI.dir/ui/settingspage.cpp.o.d -o CMakeFiles/ClamAVScannerGUI.dir/ui/settingspage.cpp.o -c /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/ui/settingspage.cpp
 
 CMakeFiles/ClamAVScannerGUI.dir/ui/settingspage.cpp.i: cmake_force
@@ -303,7 +331,7 @@ CMakeFiles/ClamAVScannerGUI.dir/ui/settingspage.cpp.s: cmake_force
 CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/UYX5XTB5RZ/qrc_resources.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/flags.make
 CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/UYX5XTB5RZ/qrc_resources.cpp.o: ClamAVScannerGUI_autogen/UYX5XTB5RZ/qrc_resources.cpp
 CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/UYX5XTB5RZ/qrc_resources.cpp.o: CMakeFiles/ClamAVScannerGUI.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/UYX5XTB5RZ/qrc_resources.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/UYX5XTB5RZ/qrc_resources.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/UYX5XTB5RZ/qrc_resources.cpp.o -MF CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/UYX5XTB5RZ/qrc_resources.cpp.o.d -o CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/UYX5XTB5RZ/qrc_resources.cpp.o -c /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/UYX5XTB5RZ/qrc_resources.cpp
 
 CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/UYX5XTB5RZ/qrc_resources.cpp.i: cmake_force
@@ -323,6 +351,8 @@ ClamAVScannerGUI_OBJECTS = \
 "CMakeFiles/ClamAVScannerGUI.dir/src/systemscan.cpp.o" \
 "CMakeFiles/ClamAVScannerGUI.dir/src/customscan.cpp.o" \
 "CMakeFiles/ClamAVScannerGUI.dir/src/signatureupdater.cpp.o" \
+"CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.o" \
+"CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.o" \
 "CMakeFiles/ClamAVScannerGUI.dir/ui/main.cpp.o" \
 "CMakeFiles/ClamAVScannerGUI.dir/ui/mainwindow.cpp.o" \
 "CMakeFiles/ClamAVScannerGUI.dir/ui/scantypepage.cpp.o" \
@@ -343,6 +373,8 @@ ClamAVScannerGUI: CMakeFiles/ClamAVScannerGUI.dir/src/quickscan.cpp.o
 ClamAVScannerGUI: CMakeFiles/ClamAVScannerGUI.dir/src/systemscan.cpp.o
 ClamAVScannerGUI: CMakeFiles/ClamAVScannerGUI.dir/src/customscan.cpp.o
 ClamAVScannerGUI: CMakeFiles/ClamAVScannerGUI.dir/src/signatureupdater.cpp.o
+ClamAVScannerGUI: CMakeFiles/ClamAVScannerGUI.dir/src/ScanWorker.cpp.o
+ClamAVScannerGUI: CMakeFiles/ClamAVScannerGUI.dir/src/customfiledialog.cpp.o
 ClamAVScannerGUI: CMakeFiles/ClamAVScannerGUI.dir/ui/main.cpp.o
 ClamAVScannerGUI: CMakeFiles/ClamAVScannerGUI.dir/ui/mainwindow.cpp.o
 ClamAVScannerGUI: CMakeFiles/ClamAVScannerGUI.dir/ui/scantypepage.cpp.o
@@ -354,11 +386,12 @@ ClamAVScannerGUI: CMakeFiles/ClamAVScannerGUI.dir/ui/settingspage.cpp.o
 ClamAVScannerGUI: CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/UYX5XTB5RZ/qrc_resources.cpp.o
 ClamAVScannerGUI: CMakeFiles/ClamAVScannerGUI.dir/build.make
 ClamAVScannerGUI: /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.13
+ClamAVScannerGUI: /usr/lib/x86_64-linux-gnu/libQt5Sql.so.5.15.13
 ClamAVScannerGUI: /usr/lib/x86_64-linux-gnu/libsqlite3.so
 ClamAVScannerGUI: /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.13
 ClamAVScannerGUI: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.13
 ClamAVScannerGUI: CMakeFiles/ClamAVScannerGUI.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX executable ClamAVScannerGUI"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Linking CXX executable ClamAVScannerGUI"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ClamAVScannerGUI.dir/link.txt --verbose=$(VERBOSE)
 	/usr/bin/cmake -E make_directory /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/Quarantine
 	/usr/bin/cmake -E copy_if_different /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/scan_results.db /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/scan_results.db

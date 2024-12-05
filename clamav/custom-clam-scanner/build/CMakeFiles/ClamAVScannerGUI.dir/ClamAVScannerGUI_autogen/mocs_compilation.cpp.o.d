@@ -1,7 +1,7 @@
 CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/mocs_compilation.cpp.o: \
  /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/mocs_compilation.cpp \
  /usr/include/stdc-predef.h \
- /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/6YEA5652QU/moc_scheduler.cpp \
+ /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/6YEA5652QU/moc_ScanWorker.cpp \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/memoryfwd.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -116,7 +116,7 @@ CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/mocs_compilation.cpp.o:
  /usr/include/c++/13/backward/auto_ptr.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h \
- /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/6YEA5652QU/../../../include/scheduler.h \
+ /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/6YEA5652QU/../../../include/ScanWorker.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QObject \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qobjectdefs.h \
@@ -248,15 +248,9 @@ CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/mocs_compilation.cpp.o:
  /usr/include/c++/13/ratio /usr/include/c++/13/cstdint \
  /usr/include/c++/13/limits /usr/include/c++/13/ctime \
  /usr/include/c++/13/bits/parse_numbers.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/QTimer \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qtimer.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qbasictimer.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/QDateTime \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qdatetime.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qshareddata.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qhash.h \
- /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/6YEA5652QU/../../../include/systemscan.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/QString \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qstring.h \
+ /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/6YEA5652QU/../../../include/customscan.h \
  /usr/include/c++/13/iostream /usr/include/c++/13/ostream \
  /usr/include/c++/13/ios /usr/include/c++/13/bits/basic_ios.h \
  /usr/include/c++/13/bits/locale_facets.h /usr/include/c++/13/cwctype \
@@ -318,30 +312,55 @@ CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/mocs_compilation.cpp.o:
  /usr/include/x86_64-linux-gnu/bits/types/struct_statx.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
  /usr/include/clamav-types.h /usr/include/inttypes.h \
- /usr/include/clamav-version.h /usr/include/c++/13/filesystem \
- /usr/include/c++/13/bits/fs_fwd.h /usr/include/c++/13/bits/fs_path.h \
+ /usr/include/clamav-version.h /usr/include/c++/13/sstream \
+ /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/iomanip \
  /usr/include/c++/13/locale \
  /usr/include/c++/13/bits/locale_facets_nonio.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
  /usr/include/libintl.h /usr/include/c++/13/bits/codecvt.h \
  /usr/include/c++/13/bits/locale_facets_nonio.tcc \
- /usr/include/c++/13/bits/locale_conv.h /usr/include/c++/13/iomanip \
- /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/sstream \
- /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/codecvt \
- /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
+ /usr/include/c++/13/bits/locale_conv.h \
+ /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/filesystem \
+ /usr/include/c++/13/bits/fs_fwd.h /usr/include/c++/13/bits/fs_path.h \
+ /usr/include/c++/13/codecvt /usr/include/c++/13/bits/fs_dir.h \
+ /usr/include/c++/13/bits/fs_ops.h \
+ /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/6YEA5652QU/../../../include/Database.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtSql/QSqlDatabase \
+ /usr/include/x86_64-linux-gnu/qt5/QtSql/qsqldatabase.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtSql/qtsqlglobal.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtSql/qtsql-config.h \
+ /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/6YEA5652QU/../../../include/systemscan.h \
  /usr/include/c++/13/thread /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/bits/this_thread_sleep.h \
- /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/6YEA5652QU/../../../include/Database.h \
- /usr/include/sqlite3.h \
- /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/UYX5XTB5RZ/moc_historypage.cpp \
- /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/UYX5XTB5RZ/../../../ui/historypage.h \
- /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget \
- /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h \
+ /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/6YEA5652QU/../../../include/quickscan.h \
+ /usr/include/pwd.h /usr/include/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h \
+ /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/6YEA5652QU/moc_customfiledialog.cpp \
+ /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/6YEA5652QU/../../../include/customfiledialog.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QFileDialog \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qfiledialog.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtwidgetsglobal.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qtguiglobal.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qtgui-config.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtwidgets-config.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qdir.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qfileinfo.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qfile.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qfiledevice.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qiodevice.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qshareddata.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qhash.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qurl.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qdialog.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qwindowdefs.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qmargins.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qpaintdevice.h \
@@ -357,7 +376,6 @@ CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/mocs_compilation.cpp.o:
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qpolygon.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qregion.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qdatastream.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qiodevice.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qline.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qtransform.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qimage.h \
@@ -371,13 +389,35 @@ CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/mocs_compilation.cpp.o:
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qsizepolicy.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qcursor.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qkeysequence.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtGui/qicon.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QVBoxLayout \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayout.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayoutitem.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgridlayout.h \
+ /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/6YEA5652QU/moc_scheduler.cpp \
+ /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/6YEA5652QU/../../../include/scheduler.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/QTimer \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qtimer.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qbasictimer.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/QDateTime \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qdatetime.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/QMap \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qmap.h \
+ /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/UYX5XTB5RZ/moc_historypage.cpp \
+ /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/UYX5XTB5RZ/../../../ui/historypage.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QTableWidgetItem \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtablewidget.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtableview.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractitemview.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractscrollarea.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qframe.h \
- /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qabstractitemmodel.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qmap.h \
@@ -390,7 +430,6 @@ CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/mocs_compilation.cpp.o:
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractspinbox.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qvalidator.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qregularexpression.h \
- /usr/include/x86_64-linux-gnu/qt5/QtGui/qicon.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qslider.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractslider.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qstyle.h \
@@ -407,32 +446,30 @@ CMakeFiles/ClamAVScannerGUI.dir/ClamAVScannerGUI_autogen/mocs_compilation.cpp.o:
  /usr/include/x86_64-linux-gnu/qt5/QtGui/QResizeEvent \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qevent.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qcoreevent.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qurl.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qfile.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qfiledevice.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qvector2d.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qtouchdevice.h \
  /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/UYX5XTB5RZ/../../../ui/scantypepage.h \
- /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/include/scheduler.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/QDebug \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qdebug.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qtextstream.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontiguouscache.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QMessageBox \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qmessagebox.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/QThread \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qthread.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qdeadlinetimer.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qelapsedtimer.h \
+ /usr/include/c++/13/future /usr/include/c++/13/mutex \
+ /usr/include/c++/13/bits/std_mutex.h \
+ /usr/include/c++/13/bits/unique_lock.h \
+ /usr/include/c++/13/condition_variable \
+ /usr/include/c++/13/bits/atomic_futex.h \
+ /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/include/ScanWorker.h \
  /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/UYX5XTB5RZ/../../../ui/schedulescanpage.h \
- /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/UYX5XTB5RZ/../../../ui/../include/scheduler.h \
+ /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/include/scheduler.h \
  /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/UYX5XTB5RZ/../../../ui/historypage.h \
  /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/UYX5XTB5RZ/../../../ui/quarantinepage.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QListWidgetItem \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlistwidget.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlistview.h \
- /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QMessageBox \
- /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qmessagebox.h \
- /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qdialog.h \
  /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/UYX5XTB5RZ/../../../ui/lastscanpage.h \
  /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/build/ClamAVScannerGUI_autogen/UYX5XTB5RZ/../../../ui/settingspage.h \
- /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
- /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
- /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QLabel \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlabel.h \
  /home/gianmarco/Downloads/clamav/clamav/custom-clam-scanner/include/signatureupdater.h \

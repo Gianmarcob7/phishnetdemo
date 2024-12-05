@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_LastScanPage_t {
-    QByteArrayData data[6];
-    char stringdata0[95];
+    QByteArrayData data[8];
+    char stringdata0[114];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,14 +35,16 @@ static const qt_meta_stringdata_LastScanPage_t qt_meta_stringdata_LastScanPage =
 QT_MOC_LITERAL(0, 0, 12), // "LastScanPage"
 QT_MOC_LITERAL(1, 13, 17), // "backButtonClicked"
 QT_MOC_LITERAL(2, 31, 0), // ""
-QT_MOC_LITERAL(3, 32, 19), // "onBackButtonClicked"
-QT_MOC_LITERAL(4, 52, 21), // "onRescanButtonClicked"
-QT_MOC_LITERAL(5, 74, 20) // "onViewDetailsClicked"
+QT_MOC_LITERAL(3, 32, 9), // "startScan"
+QT_MOC_LITERAL(4, 42, 8), // "scanType"
+QT_MOC_LITERAL(5, 51, 19), // "onBackButtonClicked"
+QT_MOC_LITERAL(6, 71, 21), // "onRescanButtonClicked"
+QT_MOC_LITERAL(7, 93, 20) // "onViewDetailsClicked"
 
     },
     "LastScanPage\0backButtonClicked\0\0"
-    "onBackButtonClicked\0onRescanButtonClicked\0"
-    "onViewDetailsClicked"
+    "startScan\0scanType\0onBackButtonClicked\0"
+    "onRescanButtonClicked\0onViewDetailsClicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -52,23 +54,25 @@ static const uint qt_meta_data_LastScanPage[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
+       2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x06 /* Public */,
+       1,    0,   39,    2, 0x06 /* Public */,
+       3,    1,   40,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,   35,    2, 0x08 /* Private */,
-       4,    0,   36,    2, 0x08 /* Private */,
-       5,    0,   37,    2, 0x08 /* Private */,
+       5,    0,   43,    2, 0x08 /* Private */,
+       6,    0,   44,    2, 0x08 /* Private */,
+       7,    0,   45,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    4,
 
  // slots: parameters
     QMetaType::Void,
@@ -85,9 +89,10 @@ void LastScanPage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         (void)_t;
         switch (_id) {
         case 0: _t->backButtonClicked(); break;
-        case 1: _t->onBackButtonClicked(); break;
-        case 2: _t->onRescanButtonClicked(); break;
-        case 3: _t->onViewDetailsClicked(); break;
+        case 1: _t->startScan((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 2: _t->onBackButtonClicked(); break;
+        case 3: _t->onRescanButtonClicked(); break;
+        case 4: _t->onViewDetailsClicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -99,8 +104,14 @@ void LastScanPage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
                 return;
             }
         }
+        {
+            using _t = void (LastScanPage::*)(const QString & );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&LastScanPage::startScan)) {
+                *result = 1;
+                return;
+            }
+        }
     }
-    (void)_a;
 }
 
 QT_INIT_METAOBJECT const QMetaObject LastScanPage::staticMetaObject = { {
@@ -132,13 +143,13 @@ int LastScanPage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }
@@ -147,6 +158,13 @@ int LastScanPage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 void LastScanPage::backButtonClicked()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+}
+
+// SIGNAL 1
+void LastScanPage::startScan(const QString & _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

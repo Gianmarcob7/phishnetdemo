@@ -1,12 +1,10 @@
-// include/scheduler.h
 #ifndef SCHEDULER_H
 #define SCHEDULER_H
 
 #include <QObject>
 #include <QTimer>
 #include <QDateTime>
-#include <map>
-#include <memory>
+#include <QMap>
 #include "systemscan.h"
 
 enum class ScanInterval {
@@ -21,7 +19,12 @@ enum class ScanType {
     CUSTOM
 };
 
-struct ScheduledScan {
+class ScheduledScan : public QObject {
+    Q_OBJECT
+public:
+    explicit ScheduledScan(QObject* parent = nullptr);
+    ~ScheduledScan();
+
     int id;
     ScanType type;
     ScanInterval interval;
@@ -37,19 +40,22 @@ public:
     explicit ScanScheduler(QObject* parent = nullptr);
     ~ScanScheduler();
 
-    int scheduleNewScan(ScanType type, ScanInterval interval, const QString& path);
+    int scheduleNewScan(ScanType type, ScanInterval interval, const QDateTime& runTime, const QString& path);
     bool removeScan(int scanId);
-    QDateTime calculateNextRunTime(ScanInterval interval) const;
+    QMap<int, ScheduledScan*> getScheduledScans() const { return scheduledScans; }
 
 private slots:
     void executeScan(int scanId);
 
 private:
-    std::map<int, std::unique_ptr<ScheduledScan>> scheduledScans;
+    QMap<int, ScheduledScan*> scheduledScans;
     int nextScanId;
-    
+    std::unique_ptr<SystemScan> systemScanner;
+
+    QDateTime calculateNextRunTime(ScanInterval interval, const QDateTime& currentTime) const;
     void setupTimer(ScheduledScan* scan);
     qint64 getIntervalMilliseconds(ScanInterval interval) const;
+    void cleanupScan(ScheduledScan* scan);
 };
 
 #endif // SCHEDULER_H
